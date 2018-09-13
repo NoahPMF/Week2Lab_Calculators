@@ -13,8 +13,15 @@
     </head>
     <body>
         <h1>Arithmetic Calculator</h1>
-        <form action="arithmentic" method="post">
-            
+        <form action="arithmetic" method="post">
+            First number:<input type ="text" name="first" value="${one}"><br>
+            Second number:<input type ="text" name="second" value="${two}"><br>
+            <input type="submit" value="+">
+            <input type="submit" value="-">
+            <input type="submit" value="*">
+            <input type="submit" value="%">
         </form>
+            Result:<div>${result}</div><br>
+            <a href="age">Age Calculator</a>
     </body>
 </html>
