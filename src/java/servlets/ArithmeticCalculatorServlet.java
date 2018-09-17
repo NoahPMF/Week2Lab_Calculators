@@ -29,18 +29,48 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
 
         String first_String = request.getParameter("first");
         String second_String = request.getParameter("second");
+        String calc = request.getParameter("calc");
 
         //request.setAttribute("one", first_String);
-       // request.setAttribute("two", first_String);
-
-        if (first_String == null || first_String.equals("") ||
-                second_String == null || second_String.equals("")) {
+        // request.setAttribute("two", first_String);
+        if (first_String == null || first_String.equals("")
+                || second_String == null || second_String.equals("")) {
             request.setAttribute("result", "please enter both values");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
             return;
         }
-        
-        
+
+        try {
+            double first_dub = Double.parseDouble(first_String);
+            double second_dub = Double.parseDouble(second_String);
+            double total;
+
+            switch (calc) {
+                case "+":
+                    total = first_dub + second_dub;
+                    request.setAttribute("result", total);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+                case "-":
+                    total = first_dub - second_dub;
+                    request.setAttribute("result", total);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+                case "*":
+                    total = first_dub * second_dub;
+                    request.setAttribute("result", total);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+                case "%":
+                    total = first_dub / second_dub;
+                    request.setAttribute("result", total);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+                    break;
+                default:
+                    break;
+            }
+
+        } catch (NumberFormatException e) {
+            request.setAttribute("result", "invalid");
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+        }
     }
 
 }
